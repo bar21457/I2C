@@ -2853,6 +2853,8 @@ void Lcd_Shift_Left_4bits(void);
 # 1 "./DS3231.h" 1
 # 11 "./DS3231.h"
 uint8_t leerSEG (void);
+uint8_t leerMIN (void);
+uint8_t leerHOR (void);
 # 48 "main_M.c" 2
 # 59 "main_M.c"
 void setup(void);
@@ -2861,21 +2863,23 @@ void main(void) {
 
     setup();
 
-    uint8_t VAL1;
-    uint8_t VAL1_U;
-    uint8_t VAL1_D;
-    uint8_t VAL1_C;
-
-    uint8_t SEG;
+    uint8_t VAL1, VAL1_U, VAL1_D, VAL1_C;
+    uint8_t SEG, SEG_U, SEG_D;
+    uint8_t MIN, MIN_U, MIN_D;
+    uint8_t HOR, HOR_U, HOR_D;
 
     char ADC1[9];
     char stringSEG[9];
+    char stringMIN[9];
+    char stringHOR[9];
 
     Lcd_Clear_4bits();
     Lcd_Set_Cursor_4bits(1,1);
     Lcd_Write_String_4bits("S1:");
-    Lcd_Set_Cursor_4bits(1,7);
-    Lcd_Write_String_4bits("Segundos:");
+    Lcd_Set_Cursor_4bits(1,10);
+    Lcd_Write_String_4bits(":");
+    Lcd_Set_Cursor_4bits(1,13);
+    Lcd_Write_String_4bits(":");
 
     while(1)
     {
@@ -2904,11 +2908,43 @@ void main(void) {
 
         SEG = leerSEG();
 
-        PORTB = SEG;
+        SEG_D = (SEG/10)%10;
+        SEG_U = SEG%10;
 
-        sprintf(stringSEG, "%u", SEG);
-        Lcd_Set_Cursor_4bits(2,7);
+        sprintf(stringSEG, "%u", SEG_D);
+        Lcd_Set_Cursor_4bits(1,14);
         Lcd_Write_String_4bits(stringSEG);
+
+        sprintf(stringSEG, "%u", SEG_U);
+        Lcd_Set_Cursor_4bits(1,15);
+        Lcd_Write_String_4bits(stringSEG);
+
+        MIN = leerMIN();
+
+        MIN_D = (MIN/10)%10;
+        MIN_U = MIN%10;
+
+        sprintf(stringMIN, "%u", MIN_D);
+        Lcd_Set_Cursor_4bits(1,11);
+        Lcd_Write_String_4bits(stringMIN);
+
+        sprintf(stringMIN, "%u", MIN_U);
+        Lcd_Set_Cursor_4bits(1,12);
+        Lcd_Write_String_4bits(stringMIN);
+
+        HOR = leerHOR();
+
+        HOR_D = (HOR/10)%10;
+        HOR_U = HOR%10;
+
+        sprintf(stringHOR, "%u", HOR_D);
+        Lcd_Set_Cursor_4bits(1,8);
+        Lcd_Write_String_4bits(stringHOR);
+
+        sprintf(stringHOR, "%u", HOR_U);
+        Lcd_Set_Cursor_4bits(1,9);
+        Lcd_Write_String_4bits(stringHOR);
+
     }
     return;
 }

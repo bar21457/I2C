@@ -9,6 +9,8 @@
 #define	DS3231_H
 
 uint8_t leerSEG (void);
+uint8_t leerMIN (void);
+uint8_t leerHOR (void);
 
 #endif	/* DS3231_H */
 

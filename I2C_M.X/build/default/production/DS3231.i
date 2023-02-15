@@ -2637,6 +2637,8 @@ extern __bank0 __bit __timeout;
 # 1 "./DS3231.h" 1
 # 11 "./DS3231.h"
 uint8_t leerSEG (void);
+uint8_t leerMIN (void);
+uint8_t leerHOR (void);
 # 10 "DS3231.c" 2
 
 # 1 "./configI2C.h" 1
@@ -2699,4 +2701,40 @@ uint8_t leerSEG(void) {
     SEG = (SEG >> 4) * 10 + (SEG & 0x0F);
 
     return SEG;
+}
+
+uint8_t leerMIN(void) {
+
+    uint8_t MIN;
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x01);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    MIN = I2C_Master_Read(0);
+    I2C_Master_Stop();
+    _delay((unsigned long)((200)*(8000000/4000.0)));
+
+    MIN = (MIN >> 4) * 10 + (MIN & 0x0F);
+
+    return MIN;
+}
+
+uint8_t leerHOR(void) {
+
+    uint8_t HOR;
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x02);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    HOR = I2C_Master_Read(0);
+    I2C_Master_Stop();
+    _delay((unsigned long)((200)*(8000000/4000.0)));
+
+    HOR = (HOR >> 4) * 10 + (HOR & 0x0F);
+
+    return HOR;
 }
