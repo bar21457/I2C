@@ -1,7 +1,7 @@
 Version 4.0 HI-TECH Software Intermediate Code
 [p mainexit ]
-"58 main_M.c
-[; ;main_M.c: 58: void setup(void);
+"59 main_M.c
+[; ;main_M.c: 59: void setup(void);
 [v _setup `(v ~T0 @X0 0 ef ]
 "50 ./configLCD_4bits.h
 [; ;./configLCD_4bits.h: 50: void Lcd_Clear_4bits(void);
@@ -30,7 +30,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [p i __delay ]
 "194 C:\Program Files\Microchip\xc8\v2.40\pic\include\c90\stdio.h
 [v _sprintf `(i ~T0 @X0 0 e1v`*uc`*Cuc ]
-"3388 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+"11 ./DS3231.h
+[; ;./DS3231.h: 11: uint8_t leerSEG (void);
+[v _leerSEG `(uc ~T0 @X0 0 ef ]
+"229 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
+[; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 229: extern volatile unsigned char PORTB __attribute__((address(0x006)));
+[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
+"3388
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 3388: extern volatile unsigned char ANSEL __attribute__((address(0x188)));
 [v _ANSEL `Vuc ~T0 @X0 0 e@392 ]
 "3450
@@ -42,17 +48,14 @@ Version 4.0 HI-TECH Software Intermediate Code
 "1603
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 1603: extern volatile unsigned char TRISD __attribute__((address(0x088)));
 [v _TRISD `Vuc ~T0 @X0 0 e@136 ]
-"229
-[; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 229: extern volatile unsigned char PORTB __attribute__((address(0x006)));
-[v _PORTB `Vuc ~T0 @X0 0 e@6 ]
 "353
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 353: extern volatile unsigned char PORTD __attribute__((address(0x008)));
 [v _PORTD `Vuc ~T0 @X0 0 e@8 ]
 "27 ./configI2C.h
 [; ;./configI2C.h: 27: void I2C_Master_Init(const unsigned long c);
 [v _I2C_Master_Init `(v ~T0 @X0 0 ef1`Cul ]
-"131 main_M.c
-[; ;main_M.c: 131:     setupINTOSC(FOSC_8MHZ);
+"133 main_M.c
+[; ;main_M.c: 133:     setupINTOSC(FOSC_8MHZ);
 [c E1349 7 6 5 4 3 2 1 .. ]
 [n E1349 . FOSC_8MHZ FOSC_4MHZ FOSC_2MHZ FOSC_1MH FOSC_500KHZ FOSC_250KHZ FOSC_125KHZ  ]
 "25 ./configINTOSC.h
@@ -320,162 +323,177 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 3547: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 [v $root$_main `(v ~T0 @X0 0 e ]
-"60 main_M.c
-[; ;main_M.c: 60: void main(void) {
+"61 main_M.c
+[; ;main_M.c: 61: void main(void) {
 [v _main `(v ~T0 @X0 1 ef ]
 {
 [e :U _main ]
 [f ]
-"62
-[; ;main_M.c: 62:     setup();
+"63
+[; ;main_M.c: 63:     setup();
 [e ( _setup ..  ]
-"64
-[; ;main_M.c: 64:     uint8_t VAL1;
-[v _VAL1 `uc ~T0 @X0 1 a ]
 "65
-[; ;main_M.c: 65:     uint8_t VAL1_U;
-[v _VAL1_U `uc ~T0 @X0 1 a ]
+[; ;main_M.c: 65:     uint8_t VAL1;
+[v _VAL1 `uc ~T0 @X0 1 a ]
 "66
-[; ;main_M.c: 66:     uint8_t VAL1_D;
-[v _VAL1_D `uc ~T0 @X0 1 a ]
+[; ;main_M.c: 66:     uint8_t VAL1_U;
+[v _VAL1_U `uc ~T0 @X0 1 a ]
 "67
-[; ;main_M.c: 67:     uint8_t VAL1_C;
+[; ;main_M.c: 67:     uint8_t VAL1_D;
+[v _VAL1_D `uc ~T0 @X0 1 a ]
+"68
+[; ;main_M.c: 68:     uint8_t VAL1_C;
 [v _VAL1_C `uc ~T0 @X0 1 a ]
-"69
-[; ;main_M.c: 69:     char ADC1[9];
-[v _ADC1 `uc ~T0 @X0 -> 9 `i a ]
-"71
-[; ;main_M.c: 71:     Lcd_Clear_4bits();
-[e ( _Lcd_Clear_4bits ..  ]
+"70
+[; ;main_M.c: 70:     uint8_t SEG;
+[v _SEG `uc ~T0 @X0 1 a ]
 "72
-[; ;main_M.c: 72:     Lcd_Set_Cursor_4bits(1,1);
-[e ( _Lcd_Set_Cursor_4bits (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
+[; ;main_M.c: 72:     char ADC1[9];
+[v _ADC1 `uc ~T0 @X0 -> 9 `i a ]
 "73
-[; ;main_M.c: 73:     Lcd_Write_String_4bits("S1:");
-[e ( _Lcd_Write_String_4bits (1 :s 1C ]
-"74
-[; ;main_M.c: 74:     Lcd_Set_Cursor_4bits(1,7);
-[e ( _Lcd_Set_Cursor_4bits (2 , -> -> 1 `i `uc -> -> 7 `i `uc ]
+[; ;main_M.c: 73:     char stringSEG[9];
+[v _stringSEG `uc ~T0 @X0 -> 9 `i a ]
 "75
-[; ;main_M.c: 75:     Lcd_Write_String_4bits("S2:");
-[e ( _Lcd_Write_String_4bits (1 :s 2C ]
+[; ;main_M.c: 75:     Lcd_Clear_4bits();
+[e ( _Lcd_Clear_4bits ..  ]
 "76
-[; ;main_M.c: 76:     Lcd_Set_Cursor_4bits(1,13);
-[e ( _Lcd_Set_Cursor_4bits (2 , -> -> 1 `i `uc -> -> 13 `i `uc ]
+[; ;main_M.c: 76:     Lcd_Set_Cursor_4bits(1,1);
+[e ( _Lcd_Set_Cursor_4bits (2 , -> -> 1 `i `uc -> -> 1 `i `uc ]
 "77
-[; ;main_M.c: 77:     Lcd_Write_String_4bits("S3:");
-[e ( _Lcd_Write_String_4bits (1 :s 3C ]
+[; ;main_M.c: 77:     Lcd_Write_String_4bits("S1:");
+[e ( _Lcd_Write_String_4bits (1 :s 1C ]
+"78
+[; ;main_M.c: 78:     Lcd_Set_Cursor_4bits(1,7);
+[e ( _Lcd_Set_Cursor_4bits (2 , -> -> 1 `i `uc -> -> 7 `i `uc ]
 "79
-[; ;main_M.c: 79:     while(1)
+[; ;main_M.c: 79:     Lcd_Write_String_4bits("Segundos:");
+[e ( _Lcd_Write_String_4bits (1 :s 2C ]
+"81
+[; ;main_M.c: 81:     while(1)
 [e :U 141 ]
-"80
-[; ;main_M.c: 80:     {
+"82
+[; ;main_M.c: 82:     {
 {
-"88
-[; ;main_M.c: 88:         I2C_Master_Start();
+"84
+[; ;main_M.c: 84:         I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
-"89
-[; ;main_M.c: 89:         I2C_Master_Write(0x51);
-[e ( _I2C_Master_Write (1 -> -> 81 `i `ui ]
-"90
-[; ;main_M.c: 90:         VAL1 = I2C_Master_Read(0);
+"85
+[; ;main_M.c: 85:         I2C_Master_Write(0x11);
+[e ( _I2C_Master_Write (1 -> -> 17 `i `ui ]
+"86
+[; ;main_M.c: 86:         VAL1 = I2C_Master_Read(0);
 [e = _VAL1 -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"91
-[; ;main_M.c: 91:         I2C_Master_Stop();
+"87
+[; ;main_M.c: 87:         I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
-"92
-[; ;main_M.c: 92:         _delay((unsigned long)((200)*(8000000/4000.0)));
+"88
+[; ;main_M.c: 88:         _delay((unsigned long)((200)*(8000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"96
-[; ;main_M.c: 96:         VAL1_C = (VAL1/100);
+"90
+[; ;main_M.c: 90:         VAL1_C = (VAL1/100);
 [e = _VAL1_C -> / -> _VAL1 `i -> 100 `i `uc ]
-"97
-[; ;main_M.c: 97:         VAL1_D = (VAL1/10)%10;
+"91
+[; ;main_M.c: 91:         VAL1_D = (VAL1/10)%10;
 [e = _VAL1_D -> % / -> _VAL1 `i -> 10 `i -> 10 `i `uc ]
-"98
-[; ;main_M.c: 98:         VAL1_U = VAL1%10;
+"92
+[; ;main_M.c: 92:         VAL1_U = VAL1%10;
 [e = _VAL1_U -> % -> _VAL1 `i -> 10 `i `uc ]
-"100
-[; ;main_M.c: 100:         sprintf(ADC1, "%u", VAL1_C);
-[e ( _sprintf (1 , (. , &U _ADC1 :s 4C -> _VAL1_C `i ]
-"101
-[; ;main_M.c: 101:         Lcd_Set_Cursor_4bits(2,1);
+"94
+[; ;main_M.c: 94:         sprintf(ADC1, "%u", VAL1_C);
+[e ( _sprintf (1 , (. , &U _ADC1 :s 3C -> _VAL1_C `i ]
+"95
+[; ;main_M.c: 95:         Lcd_Set_Cursor_4bits(2,1);
 [e ( _Lcd_Set_Cursor_4bits (2 , -> -> 2 `i `uc -> -> 1 `i `uc ]
-"102
-[; ;main_M.c: 102:         Lcd_Write_String_4bits(ADC1);
+"96
+[; ;main_M.c: 96:         Lcd_Write_String_4bits(ADC1);
 [e ( _Lcd_Write_String_4bits (1 &U _ADC1 ]
-"104
-[; ;main_M.c: 104:         sprintf(ADC1, "%u", VAL1_D);
-[e ( _sprintf (1 , (. , &U _ADC1 :s 5C -> _VAL1_D `i ]
-"105
-[; ;main_M.c: 105:         Lcd_Set_Cursor_4bits(2,2);
+"98
+[; ;main_M.c: 98:         sprintf(ADC1, "%u", VAL1_D);
+[e ( _sprintf (1 , (. , &U _ADC1 :s 4C -> _VAL1_D `i ]
+"99
+[; ;main_M.c: 99:         Lcd_Set_Cursor_4bits(2,2);
 [e ( _Lcd_Set_Cursor_4bits (2 , -> -> 2 `i `uc -> -> 2 `i `uc ]
-"106
-[; ;main_M.c: 106:         Lcd_Write_String_4bits(ADC1);
+"100
+[; ;main_M.c: 100:         Lcd_Write_String_4bits(ADC1);
 [e ( _Lcd_Write_String_4bits (1 &U _ADC1 ]
-"108
-[; ;main_M.c: 108:         sprintf(ADC1, "%u", VAL1_U);
-[e ( _sprintf (1 , (. , &U _ADC1 :s 6C -> _VAL1_U `i ]
-"109
-[; ;main_M.c: 109:         Lcd_Set_Cursor_4bits(2,3);
+"102
+[; ;main_M.c: 102:         sprintf(ADC1, "%u", VAL1_U);
+[e ( _sprintf (1 , (. , &U _ADC1 :s 5C -> _VAL1_U `i ]
+"103
+[; ;main_M.c: 103:         Lcd_Set_Cursor_4bits(2,3);
 [e ( _Lcd_Set_Cursor_4bits (2 , -> -> 2 `i `uc -> -> 3 `i `uc ]
-"110
-[; ;main_M.c: 110:         Lcd_Write_String_4bits(ADC1);
+"104
+[; ;main_M.c: 104:         Lcd_Write_String_4bits(ADC1);
 [e ( _Lcd_Write_String_4bits (1 &U _ADC1 ]
+"106
+[; ;main_M.c: 106:         SEG = leerSEG();
+[e = _SEG ( _leerSEG ..  ]
+"108
+[; ;main_M.c: 108:         PORTB = SEG;
+[e = _PORTB _SEG ]
+"110
+[; ;main_M.c: 110:         sprintf(stringSEG, "%u", SEG);
+[e ( _sprintf (1 , (. , &U _stringSEG :s 6C -> _SEG `i ]
 "111
-[; ;main_M.c: 111:     }
+[; ;main_M.c: 111:         Lcd_Set_Cursor_4bits(2,7);
+[e ( _Lcd_Set_Cursor_4bits (2 , -> -> 2 `i `uc -> -> 7 `i `uc ]
+"112
+[; ;main_M.c: 112:         Lcd_Write_String_4bits(stringSEG);
+[e ( _Lcd_Write_String_4bits (1 &U _stringSEG ]
+"113
+[; ;main_M.c: 113:     }
 }
 [e :U 140 ]
 [e $U 141  ]
 [e :U 142 ]
-"112
-[; ;main_M.c: 112:     return;
+"114
+[; ;main_M.c: 114:     return;
 [e $UE 139  ]
-"113
-[; ;main_M.c: 113: }
+"115
+[; ;main_M.c: 115: }
 [e :UE 139 ]
 }
-"119
-[; ;main_M.c: 119: void setup (void){
+"121
+[; ;main_M.c: 121: void setup (void){
 [v _setup `(v ~T0 @X0 1 ef ]
 {
 [e :U _setup ]
 [f ]
-"121
-[; ;main_M.c: 121:     ANSEL = 0;
+"123
+[; ;main_M.c: 123:     ANSEL = 0;
 [e = _ANSEL -> -> 0 `i `uc ]
-"122
-[; ;main_M.c: 122:     ANSELH = 0;
-[e = _ANSELH -> -> 0 `i `uc ]
 "124
-[; ;main_M.c: 124:     TRISB = 0;
+[; ;main_M.c: 124:     ANSELH = 0;
+[e = _ANSELH -> -> 0 `i `uc ]
+"126
+[; ;main_M.c: 126:     TRISB = 0;
 [e = _TRISB -> -> 0 `i `uc ]
-"125
-[; ;main_M.c: 125:     TRISD = 0;
-[e = _TRISD -> -> 0 `i `uc ]
 "127
-[; ;main_M.c: 127:     PORTB = 0;
+[; ;main_M.c: 127:     TRISD = 0;
+[e = _TRISD -> -> 0 `i `uc ]
+"129
+[; ;main_M.c: 129:     PORTB = 0;
 [e = _PORTB -> -> 0 `i `uc ]
-"128
-[; ;main_M.c: 128:     PORTD = 0;
-[e = _PORTD -> -> 0 `i `uc ]
 "130
-[; ;main_M.c: 130:     I2C_Master_Init(100000);
-[e ( _I2C_Master_Init (1 -> -> 100000 `l `ul ]
-"131
-[; ;main_M.c: 131:     setupINTOSC(FOSC_8MHZ);
-[e ( _setupINTOSC (1 . `E1349 0 ]
+[; ;main_M.c: 130:     PORTD = 0;
+[e = _PORTD -> -> 0 `i `uc ]
 "132
-[; ;main_M.c: 132:     Lcd_Init_4bits();
-[e ( _Lcd_Init_4bits ..  ]
+[; ;main_M.c: 132:     I2C_Master_Init(100000);
+[e ( _I2C_Master_Init (1 -> -> 100000 `l `ul ]
+"133
+[; ;main_M.c: 133:     setupINTOSC(FOSC_8MHZ);
+[e ( _setupINTOSC (1 . `E1349 0 ]
 "134
-[; ;main_M.c: 134: }
+[; ;main_M.c: 134:     Lcd_Init_4bits();
+[e ( _Lcd_Init_4bits ..  ]
+"136
+[; ;main_M.c: 136: }
 [e :UE 143 ]
 }
 [p f _sprintf 8389632 ]
+[a 3C 37 117 0 ]
 [a 4C 37 117 0 ]
 [a 5C 37 117 0 ]
 [a 6C 37 117 0 ]
-[a 3C 83 51 58 0 ]
-[a 2C 83 50 58 0 ]
+[a 2C 83 101 103 117 110 100 111 115 58 0 ]
 [a 1C 83 49 58 0 ]

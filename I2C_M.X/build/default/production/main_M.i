@@ -2849,7 +2849,12 @@ void Lcd_Shift_Right_4bits(void);
 
 void Lcd_Shift_Left_4bits(void);
 # 47 "main_M.c" 2
-# 58 "main_M.c"
+
+# 1 "./DS3231.h" 1
+# 11 "./DS3231.h"
+uint8_t leerSEG (void);
+# 48 "main_M.c" 2
+# 59 "main_M.c"
 void setup(void);
 
 void main(void) {
@@ -2861,32 +2866,25 @@ void main(void) {
     uint8_t VAL1_D;
     uint8_t VAL1_C;
 
+    uint8_t SEG;
+
     char ADC1[9];
+    char stringSEG[9];
 
     Lcd_Clear_4bits();
     Lcd_Set_Cursor_4bits(1,1);
     Lcd_Write_String_4bits("S1:");
     Lcd_Set_Cursor_4bits(1,7);
-    Lcd_Write_String_4bits("S2:");
-    Lcd_Set_Cursor_4bits(1,13);
-    Lcd_Write_String_4bits("S3:");
+    Lcd_Write_String_4bits("Segundos:");
 
     while(1)
     {
 
-
-
-
-
-
-
         I2C_Master_Start();
-        I2C_Master_Write(0x51);
+        I2C_Master_Write(0x11);
         VAL1 = I2C_Master_Read(0);
         I2C_Master_Stop();
         _delay((unsigned long)((200)*(8000000/4000.0)));
-
-
 
         VAL1_C = (VAL1/100);
         VAL1_D = (VAL1/10)%10;
@@ -2903,6 +2901,14 @@ void main(void) {
         sprintf(ADC1, "%u", VAL1_U);
         Lcd_Set_Cursor_4bits(2,3);
         Lcd_Write_String_4bits(ADC1);
+
+        SEG = leerSEG();
+
+        PORTB = SEG;
+
+        sprintf(stringSEG, "%u", SEG);
+        Lcd_Set_Cursor_4bits(2,7);
+        Lcd_Write_String_4bits(stringSEG);
     }
     return;
 }

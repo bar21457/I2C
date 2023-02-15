@@ -1,4 +1,4 @@
-# 1 "main_S.c"
+# 1 "DS3231.c"
 # 1 "<built-in>" 1
 # 1 "<built-in>" 3
 # 288 "<built-in>" 3
@@ -6,43 +6,9 @@
 # 1 "<built-in>" 2
 # 1 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\language_support.h" 1 3
 # 2 "<built-in>" 2
-# 1 "main_S.c" 2
+# 1 "DS3231.c" 2
 
 
-
-
-
-
-
-
-#pragma config FOSC = INTRC_NOCLKOUT
-
-
-
-#pragma config WDTE = OFF
-
-
-#pragma config PWRTE = OFF
-#pragma config MCLRE = OFF
-
-
-#pragma config CP = OFF
-
-#pragma config CPD = OFF
-
-#pragma config BOREN = OFF
-#pragma config IESO = OFF
-
-#pragma config FCMEN = OFF
-
-#pragma config LVP = OFF
-
-
-
-
-#pragma config BOR4V = BOR40V
-
-#pragma config WRT = OFF
 
 
 
@@ -2666,11 +2632,12 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 # 29 "C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\\pic\\include\\xc.h" 2 3
-# 42 "main_S.c" 2
+# 9 "DS3231.c" 2
 
-# 1 "C:\\Program Files\\Microchip\\xc8\\v2.40\\pic\\include\\c90\\stdint.h" 1 3
-# 43 "main_S.c" 2
-
+# 1 "./DS3231.h" 1
+# 11 "./DS3231.h"
+uint8_t leerSEG (void);
+# 10 "DS3231.c" 2
 
 # 1 "./configI2C.h" 1
 # 18 "./configI2C.h"
@@ -2713,114 +2680,23 @@ unsigned short I2C_Master_Read(unsigned short a);
 
 
 void I2C_Slave_Init(uint8_t address);
-# 45 "main_S.c" 2
-
-# 1 "./configINTOSC.h" 1
-# 14 "./configINTOSC.h"
-typedef enum
-{
-    FOSC_8MHZ = 0b0111,
-    FOSC_4MHZ = 0b0110,
-    FOSC_2MHZ = 0b0101,
-    FOSC_1MH = 0b0100,
-    FOSC_500KHZ = 0b0011,
-    FOSC_250KHZ = 0b0010,
-    FOSC_125KHZ = 0b0001
-}F_OSC;
-
-void setupINTOSC (F_OSC);
-# 46 "main_S.c" 2
-
-# 1 "./configADC.h" 1
-# 11 "./configADC.h"
-void setupADC (uint8_t);
-void readADC (uint8_t);
-# 47 "main_S.c" 2
+# 11 "DS3231.c" 2
 
 
+uint8_t leerSEG(void) {
 
+    uint8_t SEG;
 
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(0x00);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD1);
+    SEG = I2C_Master_Read(0);
+    I2C_Master_Stop();
+    _delay((unsigned long)((200)*(8000000/4000.0)));
 
+    SEG = (SEG >> 4) * 10 + (SEG & 0x0F);
 
-
-uint8_t z;
-uint8_t dato;
-
-
-
-
-
-
-void setup(void);
-
-
-
-
-
-void __attribute__((picinterrupt(("")))) isr(void){
-
-    if(PIR1bits.SSPIF == 1){
-
-        SSPCONbits.CKP = 0;
-
-        if ((SSPCONbits.SSPOV) || (SSPCONbits.WCOL)){
-            z = SSPBUF;
-            SSPCONbits.SSPOV = 0;
-            SSPCONbits.WCOL = 0;
-            SSPCONbits.CKP = 1;
-        }
-
-        if(!SSPSTATbits.D_nA && !SSPSTATbits.R_nW) {
-
-            z = SSPBUF;
-
-            PIR1bits.SSPIF = 0;
-            SSPCONbits.CKP = 1;
-            while(!SSPSTATbits.BF);
-            PORTD = SSPBUF;
-            _delay((unsigned long)((250)*(8000000/4000000.0)));
-
-        }else if(!SSPSTATbits.D_nA && SSPSTATbits.R_nW){
-            z = SSPBUF;
-            BF = 0;
-            SSPBUF = PORTB;
-            SSPCONbits.CKP = 1;
-            _delay((unsigned long)((250)*(8000000/4000000.0)));
-            while(SSPSTATbits.BF);
-        }
-
-        PIR1bits.SSPIF = 0;
-    }
-}
-
-void main(void) {
-
-    setup();
-
-    while(1){
-
-        readADC(0);
-        PORTB = ADRESH;
-
-    }
-    return;
-}
-
-
-
-
-
-void setup(void){
-    ANSEL = 0;
-    ANSELH = 0;
-
-    TRISB = 0;
-    TRISD = 0;
-
-    PORTB = 0;
-    PORTD = 0;
-
-    I2C_Slave_Init(0x10);
-    setupINTOSC(FOSC_8MHZ);
-    setupADC(0);
+    return SEG;
 }

@@ -45,6 +45,7 @@
 #include "configINTOSC.h"
 #include "configI2C.h"
 #include "configLCD_4bits.h"
+#include "DS3231.h"
 
 #define _XTAL_FREQ 8000000
 
@@ -65,33 +66,26 @@ void main(void) {
     uint8_t VAL1_U;
     uint8_t VAL1_D;
     uint8_t VAL1_C;
+    
+    uint8_t SEG;
 
     char ADC1[9];
+    char stringSEG[9];
     
     Lcd_Clear_4bits();
     Lcd_Set_Cursor_4bits(1,1);
     Lcd_Write_String_4bits("S1:");
     Lcd_Set_Cursor_4bits(1,7);
-    Lcd_Write_String_4bits("S2:");
-    Lcd_Set_Cursor_4bits(1,13);
-    Lcd_Write_String_4bits("S3:");
+    Lcd_Write_String_4bits("Segundos:");
 
     while(1)
     {   
         
-//        I2C_Master_Start();
-//        I2C_Master_Write(0x50);
-//        I2C_Master_Write(PORTD);
-//        I2C_Master_Stop();
-//        __delay_ms(200);
-        
         I2C_Master_Start();
-        I2C_Master_Write(0x51);
+        I2C_Master_Write(0x11);
         VAL1 = I2C_Master_Read(0);
         I2C_Master_Stop();
         __delay_ms(200);
-        
-//        VAL1 = PORTB;
         
         VAL1_C = (VAL1/100);
         VAL1_D = (VAL1/10)%10;
@@ -108,6 +102,14 @@ void main(void) {
         sprintf(ADC1, "%u", VAL1_U);
         Lcd_Set_Cursor_4bits(2,3);
         Lcd_Write_String_4bits(ADC1);
+        
+        SEG = leerSEG();
+        
+        PORTB = SEG;
+        
+        sprintf(stringSEG, "%u", SEG);
+        Lcd_Set_Cursor_4bits(2,7);
+        Lcd_Write_String_4bits(stringSEG);
     }
     return;
 }

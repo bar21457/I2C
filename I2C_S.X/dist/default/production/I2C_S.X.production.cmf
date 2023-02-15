@@ -11,7 +11,7 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
+$C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
 idloc IDLOC 5 2000 2000 4 2 1
 reset_vec CODE 0 0 0 3 2 1
 end_init CODE 0 C C 3 2 1
@@ -74,13 +74,13 @@ STRING 137-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\I2C_S.X.production.o
-F cinit CODE >961:C:\Users\byron\AppData\Local\Temp\xcAs1i18.s
-F cinit CODE >964:C:\Users\byron\AppData\Local\Temp\xcAs1i18.s
-F cinit CODE >978:C:\Users\byron\AppData\Local\Temp\xcAs1i18.s
-10 cinit CODE >979:C:\Users\byron\AppData\Local\Temp\xcAs1i18.s
-11 cinit CODE >985:C:\Users\byron\AppData\Local\Temp\xcAs1i18.s
-11 cinit CODE >987:C:\Users\byron\AppData\Local\Temp\xcAs1i18.s
-12 cinit CODE >988:C:\Users\byron\AppData\Local\Temp\xcAs1i18.s
+F cinit CODE >961:C:\Users\byron\AppData\Local\Temp\xcAs4qc.s
+F cinit CODE >964:C:\Users\byron\AppData\Local\Temp\xcAs4qc.s
+F cinit CODE >978:C:\Users\byron\AppData\Local\Temp\xcAs4qc.s
+10 cinit CODE >979:C:\Users\byron\AppData\Local\Temp\xcAs4qc.s
+11 cinit CODE >985:C:\Users\byron\AppData\Local\Temp\xcAs4qc.s
+11 cinit CODE >987:C:\Users\byron\AppData\Local\Temp\xcAs4qc.s
+12 cinit CODE >988:C:\Users\byron\AppData\Local\Temp\xcAs4qc.s
 4 intentry CODE >68:C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_S.X\main_S.c
 15 text6 CODE >68:C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_S.X\main_S.c
 15 text6 CODE >70:C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_S.X\main_S.c
@@ -200,18 +200,18 @@ _BF 4A0 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 __Hstrings 0 0 ABS 0 strings -
 _ADIF 66 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 _PEIE 5E 0 ABS 0 - dist/default/production\I2C_S.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
+___sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
 _main 22E 0 CODE 0 maintext dist/default/production\I2C_S.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\I2C_S.X.production.o
-start 18 0 CODE 0 init C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
+start 18 0 CODE 0 init C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
 __HbssCOMMON 0 0 ABS 0 bssCOMMON -
 __Hpowerup 0 0 CODE 0 powerup -
-intlevel0 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
 __LbssCOMMON 0 0 ABS 0 bssCOMMON -
 _setupINTOSC 254 0 CODE 0 text2 dist/default/production\I2C_S.X.production.o
 _OSCCONbits 8F 0 ABS 0 - dist/default/production\I2C_S.X.production.o
@@ -223,8 +223,8 @@ _ANSELH 189 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 _SSPCONbits 14 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 __Lmaintext 0 0 ABS 0 maintext -
 setupINTOSC@F 74 0 COMMON 1 cstackCOMMON dist/default/production\I2C_S.X.production.o
-___stackhi 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
-___stacklo 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
+___stackhi 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
+___stacklo 0 0 ABS 0 - C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
 readADC@canal 75 0 COMMON 1 cstackCOMMON dist/default/production\I2C_S.X.production.o
 _I2C_Slave_Init 1FA 0 CODE 0 text4 dist/default/production\I2C_S.X.production.o
 start_initialization 1E 0 CODE 0 cinit dist/default/production\I2C_S.X.production.o
@@ -236,7 +236,7 @@ _SSPCON 14 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 _TRISC3 43B 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 _TRISC4 43C 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 _readADC E4 0 CODE 0 text5 dist/default/production\I2C_S.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
+___int_sp 0 0 STACK 2 stack C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -281,7 +281,7 @@ saved_w 7E 0 ABS 0 - dist/default/production\I2C_S.X.production.o
 __end_of_setupINTOSC 26E 0 CODE 0 text2 dist/default/production\I2C_S.X.production.o
 __end_of_isr E4 0 CODE 0 text6 dist/default/production\I2C_S.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\byron\AppData\Local\Temp\xcAs1i18.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\byron\AppData\Local\Temp\xcAs4qc.o
 __pmaintext 22E 0 CODE 0 maintext dist/default/production\I2C_S.X.production.o
 __Lcommon 0 0 ABS 0 common -
 __Lconfig 0 0 CONFIG 4 config -

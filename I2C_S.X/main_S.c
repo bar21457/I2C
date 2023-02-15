@@ -128,7 +128,7 @@ void setup(void){
     PORTB = 0;
     PORTD = 0;
     
-    I2C_Slave_Init(0x50);
+    I2C_Slave_Init(0x10);
     setupINTOSC(FOSC_8MHZ);     //Configuramos el oscilador interno a 4MHZ
     setupADC(0);
 }
