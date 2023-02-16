@@ -2894,33 +2894,15 @@ void main(void) {
 
     setup();
 
-    uint8_t VAL1, VAL1_U, VAL1_D, VAL1_C;
-    uint8_t SEG, SEG_U, SEG_D;
-    uint8_t MIN, MIN_U, MIN_D;
-    uint8_t HOR, HOR_U, HOR_D;
-    uint8_t DIA, DIA_U, DIA_D;
-    uint8_t MES, MES_U, MES_D;
-    uint8_t AO, AO_U, AO_D, AO_C, AO_UM;
+    uint8_t VAL1, VAL1_U, VAL1_D, VAL1_C, SEG, MIN, HOR, DIA, MES, AO;
 
     char ADC1[9];
-    char stringSEG[9];
-    char stringMIN[9];
-    char stringHOR[9];
-    char stringDIA[9];
-    char stringMES[9];
-    char stringAO[9];
+    char tiempo[8] = {"00:00:00"};
+    char fecha[10] = {"01/01/2000"};
 
     Lcd_Clear_4bits();
     Lcd_Set_Cursor_4bits(1,1);
     Lcd_Write_String_4bits("S1:");
-    Lcd_Set_Cursor_4bits(1,9);
-    Lcd_Write_String_4bits(":");
-    Lcd_Set_Cursor_4bits(1,12);
-    Lcd_Write_String_4bits(":");
-    Lcd_Set_Cursor_4bits(2,9);
-    Lcd_Write_String_4bits("/");
-    Lcd_Set_Cursor_4bits(2,12);
-    Lcd_Write_String_4bits("/");
 
     while(1)
     {
@@ -2951,91 +2933,34 @@ void main(void) {
 
         SEG = leerRTC(REG_SEG);
 
-        SEG_D = (SEG/10)%10;
-        SEG_U = SEG%10;
-
-        sprintf(stringSEG, "%u", SEG_D);
-        Lcd_Set_Cursor_4bits(1,13);
-        Lcd_Write_String_4bits(stringSEG);
-
-        sprintf(stringSEG, "%u", SEG_U);
-        Lcd_Set_Cursor_4bits(1,14);
-        Lcd_Write_String_4bits(stringSEG);
-
         MIN = leerRTC(REG_MIN);
-
-        MIN_D = (MIN/10)%10;
-        MIN_U = MIN%10;
-
-        sprintf(stringMIN, "%u", MIN_D);
-        Lcd_Set_Cursor_4bits(1,10);
-        Lcd_Write_String_4bits(stringMIN);
-
-        sprintf(stringMIN, "%u", MIN_U);
-        Lcd_Set_Cursor_4bits(1,11);
-        Lcd_Write_String_4bits(stringMIN);
 
         HOR = leerRTC(REG_HOR);
 
-        HOR_D = (HOR/10)%10;
-        HOR_U = HOR%10;
-
-        sprintf(stringHOR, "%u", HOR_D);
-        Lcd_Set_Cursor_4bits(1,7);
-        Lcd_Write_String_4bits(stringHOR);
-
-        sprintf(stringHOR, "%u", HOR_U);
-        Lcd_Set_Cursor_4bits(1,8);
-        Lcd_Write_String_4bits(stringHOR);
-
         DIA = leerRTC(REG_DIA);
-
-        DIA_D = (DIA/10)%10;
-        DIA_U = DIA%10;
-
-        sprintf(stringDIA, "%u", DIA_D);
-        Lcd_Set_Cursor_4bits(2,7);
-        Lcd_Write_String_4bits(stringDIA);
-
-        sprintf(stringDIA, "%u", DIA_U);
-        Lcd_Set_Cursor_4bits(2,8);
-        Lcd_Write_String_4bits(stringDIA);
 
         MES = leerRTC(REG_MES);
 
-        MES_D = (MES/10)%10;
-        MES_U = MES%10;
-
-        sprintf(stringMES, "%u", MES_D);
-        Lcd_Set_Cursor_4bits(2,10);
-        Lcd_Write_String_4bits(stringMES);
-
-        sprintf(stringMES, "%u", MES_U);
-        Lcd_Set_Cursor_4bits(2,11);
-        Lcd_Write_String_4bits(stringMES);
-
         AO = leerRTC(REG_A);
 
-        AO_UM = 2;
-        AO_C = ((AO/10)/10)%10;
-        AO_D = (AO/10)%10;
-        AO_U = AO%10;
+        tiempo[7] = SEG % 10 + 48;
+        tiempo[6] = SEG / 10 + 48;
+        tiempo[4] = MIN % 10 + 48;
+        tiempo[3] = MIN / 10 + 48;
+        tiempo[1] = HOR % 10 + 48;
+        tiempo[0] = HOR / 10 + 48;
+        fecha[9] = AO % 10 + 48;
+        fecha[8] = AO / 10 + 48;
+        fecha[4] = MES % 10 + 48;
+        fecha[3] = MES / 10 + 48;
+        fecha[1] = DIA % 10 + 48;
+        fecha[0] = DIA / 10 + 48;
 
-        sprintf(stringAO, "%u", AO_UM);
-        Lcd_Set_Cursor_4bits(2,13);
-        Lcd_Write_String_4bits(stringAO);
+        Lcd_Set_Cursor_4bits(1,7);
+        Lcd_Write_String_4bits(tiempo);
+        Lcd_Set_Cursor_4bits(2,7);
+        Lcd_Write_String_4bits(fecha);
 
-        sprintf(stringAO, "%u", AO_C);
-        Lcd_Set_Cursor_4bits(2,14);
-        Lcd_Write_String_4bits(stringAO);
-
-        sprintf(stringAO, "%u", AO_D);
-        Lcd_Set_Cursor_4bits(2,15);
-        Lcd_Write_String_4bits(stringAO);
-
-        sprintf(stringAO, "%u", AO_U);
-        Lcd_Set_Cursor_4bits(2,16);
-        Lcd_Write_String_4bits(stringAO);
     }
     return;
 }
