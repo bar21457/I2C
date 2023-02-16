@@ -2851,10 +2851,18 @@ void Lcd_Shift_Left_4bits(void);
 # 47 "main_M.c" 2
 
 # 1 "./DS3231.h" 1
-# 11 "./DS3231.h"
-uint8_t leerSEG (void);
-uint8_t leerMIN (void);
-uint8_t leerHOR (void);
+# 14 "./DS3231.h"
+typedef enum
+{
+    REG_SEG = 0x00,
+    REG_MIN = 0x01,
+    REG_HOR = 0x02,
+    REG_DIA = 0x03,
+    REG_MES = 0x04,
+    REG_A = 0x05,
+}REG;
+
+uint8_t leerRTC (REG);
 # 48 "main_M.c" 2
 # 59 "main_M.c"
 void setup(void);
@@ -2867,19 +2875,29 @@ void main(void) {
     uint8_t SEG, SEG_U, SEG_D;
     uint8_t MIN, MIN_U, MIN_D;
     uint8_t HOR, HOR_U, HOR_D;
+    uint8_t DIA, DIA_U, DIA_D;
+    uint8_t MES, MES_U, MES_D;
+    uint8_t AO, AO_U, AO_D, AO_C, AO_UM;
 
     char ADC1[9];
     char stringSEG[9];
     char stringMIN[9];
     char stringHOR[9];
+    char stringDIA[9];
+    char stringMES[9];
+    char stringAO[9];
 
     Lcd_Clear_4bits();
     Lcd_Set_Cursor_4bits(1,1);
     Lcd_Write_String_4bits("S1:");
-    Lcd_Set_Cursor_4bits(1,10);
+    Lcd_Set_Cursor_4bits(1,9);
     Lcd_Write_String_4bits(":");
-    Lcd_Set_Cursor_4bits(1,13);
+    Lcd_Set_Cursor_4bits(1,12);
     Lcd_Write_String_4bits(":");
+    Lcd_Set_Cursor_4bits(2,9);
+    Lcd_Write_String_4bits("/");
+    Lcd_Set_Cursor_4bits(2,12);
+    Lcd_Write_String_4bits("/");
 
     while(1)
     {
@@ -2906,45 +2924,93 @@ void main(void) {
         Lcd_Set_Cursor_4bits(2,3);
         Lcd_Write_String_4bits(ADC1);
 
-        SEG = leerSEG();
+        SEG = leerRTC(REG_SEG);
 
         SEG_D = (SEG/10)%10;
         SEG_U = SEG%10;
 
         sprintf(stringSEG, "%u", SEG_D);
-        Lcd_Set_Cursor_4bits(1,14);
+        Lcd_Set_Cursor_4bits(1,13);
         Lcd_Write_String_4bits(stringSEG);
 
         sprintf(stringSEG, "%u", SEG_U);
-        Lcd_Set_Cursor_4bits(1,15);
+        Lcd_Set_Cursor_4bits(1,14);
         Lcd_Write_String_4bits(stringSEG);
 
-        MIN = leerMIN();
+        MIN = leerRTC(REG_MIN);
 
         MIN_D = (MIN/10)%10;
         MIN_U = MIN%10;
 
         sprintf(stringMIN, "%u", MIN_D);
-        Lcd_Set_Cursor_4bits(1,11);
+        Lcd_Set_Cursor_4bits(1,10);
         Lcd_Write_String_4bits(stringMIN);
 
         sprintf(stringMIN, "%u", MIN_U);
-        Lcd_Set_Cursor_4bits(1,12);
+        Lcd_Set_Cursor_4bits(1,11);
         Lcd_Write_String_4bits(stringMIN);
 
-        HOR = leerHOR();
+        HOR = leerRTC(REG_HOR);
 
         HOR_D = (HOR/10)%10;
         HOR_U = HOR%10;
 
         sprintf(stringHOR, "%u", HOR_D);
-        Lcd_Set_Cursor_4bits(1,8);
+        Lcd_Set_Cursor_4bits(1,7);
         Lcd_Write_String_4bits(stringHOR);
 
         sprintf(stringHOR, "%u", HOR_U);
-        Lcd_Set_Cursor_4bits(1,9);
+        Lcd_Set_Cursor_4bits(1,8);
         Lcd_Write_String_4bits(stringHOR);
 
+        DIA = leerRTC(REG_DIA);
+
+        DIA_D = (DIA/10)%10;
+        DIA_U = DIA%10;
+
+        sprintf(stringDIA, "%u", DIA_D);
+        Lcd_Set_Cursor_4bits(2,7);
+        Lcd_Write_String_4bits(stringDIA);
+
+        sprintf(stringDIA, "%u", DIA_U);
+        Lcd_Set_Cursor_4bits(2,8);
+        Lcd_Write_String_4bits(stringDIA);
+
+        MES = leerRTC(REG_MES);
+
+        MES_D = (MES/10)%10;
+        MES_U = MES%10;
+
+        sprintf(stringMES, "%u", MES_D);
+        Lcd_Set_Cursor_4bits(2,10);
+        Lcd_Write_String_4bits(stringMES);
+
+        sprintf(stringMES, "%u", MES_U);
+        Lcd_Set_Cursor_4bits(2,11);
+        Lcd_Write_String_4bits(stringMES);
+
+        AO = leerRTC(REG_A);
+
+        AO_UM = 2;
+        AO_C = ((AO/10)/10)%10;
+        AO_D = (AO/10)%10;
+        AO_U = AO%10;
+
+        sprintf(stringAO, "%u", AO_UM);
+        Lcd_Set_Cursor_4bits(2,13);
+        Lcd_Write_String_4bits(stringAO);
+
+        sprintf(stringAO, "%u", AO_C);
+        Lcd_Set_Cursor_4bits(2,14);
+        Lcd_Write_String_4bits(stringAO);
+
+        sprintf(stringAO, "%u", AO_D);
+        Lcd_Set_Cursor_4bits(2,15);
+        Lcd_Write_String_4bits(stringAO);
+
+        sprintf(stringAO, "%u", AO_U);
+        Lcd_Set_Cursor_4bits(2,16);
+        Lcd_Write_String_4bits(stringAO);
     }
     return;
 }

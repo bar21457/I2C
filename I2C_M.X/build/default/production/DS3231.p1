@@ -1,4 +1,8 @@
 Version 4.0 HI-TECH Software Intermediate Code
+"13 DS3231.c
+[; ;DS3231.c: 13: uint8_t leerRTC(REG R) {
+[c E1292 0 1 2 3 4 5 .. ]
+[n E1292 . REG_SEG REG_MIN REG_HOR REG_DIA REG_MES REG_A  ]
 "39 ./configI2C.h
 [; ;./configI2C.h: 39: void I2C_Master_Start(void);
 [v _I2C_Master_Start `(v ~T0 @X0 0 ef ]
@@ -253,14 +257,15 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 3547: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
 "13 DS3231.c
-[; ;DS3231.c: 13: uint8_t leerSEG(void) {
-[v _leerSEG `(uc ~T0 @X0 1 ef ]
+[; ;DS3231.c: 13: uint8_t leerRTC(REG R) {
+[v _leerRTC `(uc ~T0 @X0 1 ef1`E1292 ]
 {
-[e :U _leerSEG ]
+[e :U _leerRTC ]
+[v _R `E1292 ~T0 @X0 1 r1 ]
 [f ]
 "15
-[; ;DS3231.c: 15:     uint8_t SEG;
-[v _SEG `uc ~T0 @X0 1 a ]
+[; ;DS3231.c: 15:     uint8_t DATO;
+[v _DATO `uc ~T0 @X0 1 a ]
 "17
 [; ;DS3231.c: 17:     I2C_Master_Start();
 [e ( _I2C_Master_Start ..  ]
@@ -268,8 +273,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;DS3231.c: 18:     I2C_Master_Write(0xD0);
 [e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
 "19
-[; ;DS3231.c: 19:     I2C_Master_Write(0x00);
-[e ( _I2C_Master_Write (1 -> -> 0 `i `ui ]
+[; ;DS3231.c: 19:     I2C_Master_Write(R);
+[e ( _I2C_Master_Write (1 -> _R `ui ]
 "20
 [; ;DS3231.c: 20:     I2C_Master_RepeatedStart();
 [e ( _I2C_Master_RepeatedStart ..  ]
@@ -277,8 +282,8 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;DS3231.c: 21:     I2C_Master_Write(0xD1);
 [e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
 "22
-[; ;DS3231.c: 22:     SEG = I2C_Master_Read(0);
-[e = _SEG -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
+[; ;DS3231.c: 22:     DATO = I2C_Master_Read(0);
+[e = _DATO -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
 "23
 [; ;DS3231.c: 23:     I2C_Master_Stop();
 [e ( _I2C_Master_Stop ..  ]
@@ -286,101 +291,13 @@ Version 4.0 HI-TECH Software Intermediate Code
 [; ;DS3231.c: 24:     _delay((unsigned long)((200)*(8000000/4000.0)));
 [e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
 "26
-[; ;DS3231.c: 26:     SEG = (SEG >> 4) * 10 + (SEG & 0x0F);
-[e = _SEG -> + * >> -> _SEG `i -> 4 `i -> 10 `i & -> _SEG `i -> 15 `i `uc ]
+[; ;DS3231.c: 26:     DATO = (DATO >> 4) * 10 + (DATO & 0x0F);
+[e = _DATO -> + * >> -> _DATO `i -> 4 `i -> 10 `i & -> _DATO `i -> 15 `i `uc ]
 "28
-[; ;DS3231.c: 28:     return SEG;
-[e ) _SEG ]
+[; ;DS3231.c: 28:     return DATO;
+[e ) _DATO ]
 [e $UE 138  ]
 "29
 [; ;DS3231.c: 29: }
 [e :UE 138 ]
-}
-"31
-[; ;DS3231.c: 31: uint8_t leerMIN(void) {
-[v _leerMIN `(uc ~T0 @X0 1 ef ]
-{
-[e :U _leerMIN ]
-[f ]
-"33
-[; ;DS3231.c: 33:     uint8_t MIN;
-[v _MIN `uc ~T0 @X0 1 a ]
-"35
-[; ;DS3231.c: 35:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"36
-[; ;DS3231.c: 36:     I2C_Master_Write(0xD0);
-[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
-"37
-[; ;DS3231.c: 37:     I2C_Master_Write(0x01);
-[e ( _I2C_Master_Write (1 -> -> 1 `i `ui ]
-"38
-[; ;DS3231.c: 38:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
-"39
-[; ;DS3231.c: 39:     I2C_Master_Write(0xD1);
-[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
-"40
-[; ;DS3231.c: 40:     MIN = I2C_Master_Read(0);
-[e = _MIN -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"41
-[; ;DS3231.c: 41:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"42
-[; ;DS3231.c: 42:     _delay((unsigned long)((200)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"44
-[; ;DS3231.c: 44:     MIN = (MIN >> 4) * 10 + (MIN & 0x0F);
-[e = _MIN -> + * >> -> _MIN `i -> 4 `i -> 10 `i & -> _MIN `i -> 15 `i `uc ]
-"46
-[; ;DS3231.c: 46:     return MIN;
-[e ) _MIN ]
-[e $UE 139  ]
-"47
-[; ;DS3231.c: 47: }
-[e :UE 139 ]
-}
-"49
-[; ;DS3231.c: 49: uint8_t leerHOR(void) {
-[v _leerHOR `(uc ~T0 @X0 1 ef ]
-{
-[e :U _leerHOR ]
-[f ]
-"51
-[; ;DS3231.c: 51:     uint8_t HOR;
-[v _HOR `uc ~T0 @X0 1 a ]
-"53
-[; ;DS3231.c: 53:     I2C_Master_Start();
-[e ( _I2C_Master_Start ..  ]
-"54
-[; ;DS3231.c: 54:     I2C_Master_Write(0xD0);
-[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
-"55
-[; ;DS3231.c: 55:     I2C_Master_Write(0x02);
-[e ( _I2C_Master_Write (1 -> -> 2 `i `ui ]
-"56
-[; ;DS3231.c: 56:     I2C_Master_RepeatedStart();
-[e ( _I2C_Master_RepeatedStart ..  ]
-"57
-[; ;DS3231.c: 57:     I2C_Master_Write(0xD1);
-[e ( _I2C_Master_Write (1 -> -> 209 `i `ui ]
-"58
-[; ;DS3231.c: 58:     HOR = I2C_Master_Read(0);
-[e = _HOR -> ( _I2C_Master_Read (1 -> -> 0 `i `us `uc ]
-"59
-[; ;DS3231.c: 59:     I2C_Master_Stop();
-[e ( _I2C_Master_Stop ..  ]
-"60
-[; ;DS3231.c: 60:     _delay((unsigned long)((200)*(8000000/4000.0)));
-[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
-"62
-[; ;DS3231.c: 62:     HOR = (HOR >> 4) * 10 + (HOR & 0x0F);
-[e = _HOR -> + * >> -> _HOR `i -> 4 `i -> 10 `i & -> _HOR `i -> 15 `i `uc ]
-"64
-[; ;DS3231.c: 64:     return HOR;
-[e ) _HOR ]
-[e $UE 140  ]
-"65
-[; ;DS3231.c: 65: }
-[e :UE 140 ]
 }

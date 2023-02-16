@@ -2635,10 +2635,18 @@ extern __bank0 __bit __timeout;
 # 9 "DS3231.c" 2
 
 # 1 "./DS3231.h" 1
-# 11 "./DS3231.h"
-uint8_t leerSEG (void);
-uint8_t leerMIN (void);
-uint8_t leerHOR (void);
+# 14 "./DS3231.h"
+typedef enum
+{
+    REG_SEG = 0x00,
+    REG_MIN = 0x01,
+    REG_HOR = 0x02,
+    REG_DIA = 0x03,
+    REG_MES = 0x04,
+    REG_A = 0x05,
+}REG;
+
+uint8_t leerRTC (REG);
 # 10 "DS3231.c" 2
 
 # 1 "./configI2C.h" 1
@@ -2685,56 +2693,20 @@ void I2C_Slave_Init(uint8_t address);
 # 11 "DS3231.c" 2
 
 
-uint8_t leerSEG(void) {
+uint8_t leerRTC(REG R) {
 
-    uint8_t SEG;
-
-    I2C_Master_Start();
-    I2C_Master_Write(0xD0);
-    I2C_Master_Write(0x00);
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0xD1);
-    SEG = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((200)*(8000000/4000.0)));
-
-    SEG = (SEG >> 4) * 10 + (SEG & 0x0F);
-
-    return SEG;
-}
-
-uint8_t leerMIN(void) {
-
-    uint8_t MIN;
+    uint8_t DATO;
 
     I2C_Master_Start();
     I2C_Master_Write(0xD0);
-    I2C_Master_Write(0x01);
+    I2C_Master_Write(R);
     I2C_Master_RepeatedStart();
     I2C_Master_Write(0xD1);
-    MIN = I2C_Master_Read(0);
+    DATO = I2C_Master_Read(0);
     I2C_Master_Stop();
     _delay((unsigned long)((200)*(8000000/4000.0)));
 
-    MIN = (MIN >> 4) * 10 + (MIN & 0x0F);
+    DATO = (DATO >> 4) * 10 + (DATO & 0x0F);
 
-    return MIN;
-}
-
-uint8_t leerHOR(void) {
-
-    uint8_t HOR;
-
-    I2C_Master_Start();
-    I2C_Master_Write(0xD0);
-    I2C_Master_Write(0x02);
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0xD1);
-    HOR = I2C_Master_Read(0);
-    I2C_Master_Stop();
-    _delay((unsigned long)((200)*(8000000/4000.0)));
-
-    HOR = (HOR >> 4) * 10 + (HOR & 0x0F);
-
-    return HOR;
+    return DATO;
 }
