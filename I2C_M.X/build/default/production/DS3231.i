@@ -2707,7 +2707,7 @@ uint8_t leerRTC(REG R) {
     I2C_Master_Write(0xD1);
     DATO = I2C_Master_Read(0);
     I2C_Master_Stop();
-    _delay((unsigned long)((200)*(8000000/4000.0)));
+    _delay((unsigned long)((10)*(8000000/4000.0)));
 
     DATO = (DATO >> 4) * 10 + (DATO & 0x0F);
 
@@ -2721,9 +2721,7 @@ void modifRTC(REG R, D) {
     I2C_Master_Start();
     I2C_Master_Write(0xD0);
     I2C_Master_Write(R);
-    I2C_Master_RepeatedStart();
-    I2C_Master_Write(0xD0);
     I2C_Master_Write(D);
     I2C_Master_Stop();
-    _delay((unsigned long)((200)*(8000000/4000.0)));
+    _delay((unsigned long)((10)*(8000000/4000.0)));
 }

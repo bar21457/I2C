@@ -13,7 +13,7 @@ FOSC_500KHZ 3
 FOSC_250KHZ 2
 FOSC_125KHZ 1
 ]
-"122 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
+"251 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
 [e E1387 . `uc
 REG_SEG 0
 REG_MIN 1
@@ -22,7 +22,7 @@ REG_DIA 3
 REG_MES 4
 REG_A 5
 ]
-"180
+"333
 [e E1349 . `uc
 FOSC_8MHZ 7
 FOSC_4MHZ 6
@@ -95,11 +95,13 @@ REG_A 5
 [v _Lcd_Write_String_4bits Lcd_Write_String_4bits `(v  1 e 1 0 ]
 "13 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\DS3231.c
 [v _leerRTC leerRTC `(uc  1 e 1 0 ]
-"63 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
+"31
+[v _modifRTC modifRTC `(v  1 e 1 0 ]
+"70 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
 [v _ISR ISR `II(v  1 e 1 0 ]
-"81
+"215
 [v _main main `(v  1 e 1 0 ]
-"160
+"313
 [v _setup setup `(v  1 e 1 0 ]
 "167 C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h
 [v _PORTA PORTA `VEuc  1 e 1 @5 ]
@@ -152,7 +154,7 @@ REG_A 5
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @19 ]
 "851
 [v _SSPCON SSPCON `VEuc  1 e 1 @20 ]
-[s S295 . 1 `uc 1 PS 1 0 :3:0 
+[s S301 . 1 `uc 1 PS 1 0 :3:0 
 `uc 1 PSA 1 0 :1:3 
 `uc 1 T0SE 1 0 :1:4 
 `uc 1 T0CS 1 0 :1:5 
@@ -160,12 +162,12 @@ REG_A 5
 `uc 1 nRBPU 1 0 :1:7 
 ]
 "1367
-[s S302 . 1 `uc 1 PS0 1 0 :1:0 
+[s S308 . 1 `uc 1 PS0 1 0 :1:0 
 `uc 1 PS1 1 0 :1:1 
 `uc 1 PS2 1 0 :1:2 
 ]
-[u S306 . 1 `S295 1 . 1 0 `S302 1 . 1 0 ]
-[v _OPTION_REGbits OPTION_REGbits `VES306  1 e 1 @129 ]
+[u S312 . 1 `S301 1 . 1 0 `S308 1 . 1 0 ]
+[v _OPTION_REGbits OPTION_REGbits `VES312  1 e 1 @129 ]
 "1417
 [v _TRISA TRISA `VEuc  1 e 1 @133 ]
 "1479
@@ -216,10 +218,10 @@ REG_A 5
 [v _SSPADD SSPADD `VEuc  1 e 1 @147 ]
 "2178
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @148 ]
-[s S321 . 1 `uc 1 WPUB 1 0 :8:0 
+[s S327 . 1 `uc 1 WPUB 1 0 :8:0 
 ]
 "2367
-[s S323 . 1 `uc 1 WPUB0 1 0 :1:0 
+[s S329 . 1 `uc 1 WPUB0 1 0 :1:0 
 `uc 1 WPUB1 1 0 :1:1 
 `uc 1 WPUB2 1 0 :1:2 
 `uc 1 WPUB3 1 0 :1:3 
@@ -228,8 +230,8 @@ REG_A 5
 `uc 1 WPUB6 1 0 :1:6 
 `uc 1 WPUB7 1 0 :1:7 
 ]
-[u S332 . 1 `S321 1 . 1 0 `S323 1 . 1 0 ]
-[v _WPUBbits WPUBbits `VES332  1 e 1 @149 ]
+[u S338 . 1 `S327 1 . 1 0 `S329 1 . 1 0 ]
+[v _WPUBbits WPUBbits `VES338  1 e 1 @149 ]
 "2417
 [v _IOCB IOCB `VEuc  1 e 1 @150 ]
 "3388
@@ -252,31 +254,35 @@ REG_A 5
 [v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
 "61 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
 [v _modo modo `uc  1 e 1 0 ]
-"81
+"62
+[v _VAL1 VAL1 `uc  1 e 1 0 ]
+[v _VAL1_U VAL1_U `uc  1 e 1 0 ]
+[v _VAL1_D VAL1_D `uc  1 e 1 0 ]
+[v _VAL1_C VAL1_C `uc  1 e 1 0 ]
+"63
+[v _SEG SEG `uc  1 e 1 0 ]
+[v _MIN MIN `uc  1 e 1 0 ]
+[v _HOR HOR `uc  1 e 1 0 ]
+[v _DIA DIA `uc  1 e 1 0 ]
+[v _MES MES `uc  1 e 1 0 ]
+[v _AO AO `uc  1 e 1 0 ]
+"64
+[v _modifSEG modifSEG `uc  1 e 1 0 ]
+[v _modifMIN modifMIN `uc  1 e 1 0 ]
+[v _modifHOR modifHOR `uc  1 e 1 0 ]
+[v _modifDIA modifDIA `uc  1 e 1 0 ]
+[v _modifMES modifMES `uc  1 e 1 0 ]
+[v _modifAO modifAO `uc  1 e 1 0 ]
+"66
+[v _ADC1 ADC1 `[9]uc  1 e 9 0 ]
+"67
+[v _tiempo tiempo `[8]uc  1 e 8 0 ]
+"68
+[v _fecha fecha `[10]uc  1 e 10 0 ]
+"215
 [v _main main `(v  1 e 1 0 ]
 {
-"89
-[v main@fecha fecha `[10]uc  1 a 10 33 ]
-"87
-[v main@ADC1 ADC1 `[9]uc  1 a 9 24 ]
-"88
-[v main@tiempo tiempo `[8]uc  1 a 8 43 ]
-"85
-[v main@VAL1 VAL1 `uc  1 a 1 60 ]
-[v main@AO AO `uc  1 a 1 59 ]
-[v main@MES MES `uc  1 a 1 58 ]
-[v main@DIA DIA `uc  1 a 1 57 ]
-[v main@HOR HOR `uc  1 a 1 56 ]
-[v main@MIN MIN `uc  1 a 1 55 ]
-[v main@SEG SEG `uc  1 a 1 54 ]
-[v main@VAL1_C VAL1_C `uc  1 a 1 53 ]
-[v main@VAL1_D VAL1_D `uc  1 a 1 52 ]
-[v main@VAL1_U VAL1_U `uc  1 a 1 51 ]
-"87
-[v main@F1416 F1416 `[8]uc  1 s 8 F1416 ]
-"88
-[v main@F1418 F1418 `[10]uc  1 s 10 F1418 ]
-"154
+"307
 } 0
 "505 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
@@ -321,10 +327,10 @@ REG_A 5
 [v ___lwdiv@dividend dividend `ui  1 p 2 5 ]
 "30
 } 0
-"160 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
+"313 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
 [v _setup setup `(v  1 e 1 0 ]
 {
-"187
+"340
 } 0
 "11 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\configINTOSC.c
 [v _setupINTOSC setupINTOSC `(v  1 e 1 0 ]
@@ -358,16 +364,50 @@ REG_A 5
 [v ___lldiv@dividend dividend `ul  1 p 4 4 ]
 "30
 } 0
+"31 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\DS3231.c
+[v _modifRTC modifRTC `(v  1 e 1 0 ]
+{
+[v modifRTC@R R `E1292  1 a 1 wreg ]
+[v modifRTC@R R `E1292  1 a 1 wreg ]
+[v modifRTC@D D `i  1 p 2 10 ]
+"33
+[v modifRTC@R R `E1292  1 a 1 9 ]
+"41
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
+[v ___awmod __awmod `(i  1 e 2 0 ]
+{
+"10
+[v ___awmod@sign sign `uc  1 a 1 9 ]
+[v ___awmod@counter counter `uc  1 a 1 8 ]
+"5
+[v ___awmod@divisor divisor `i  1 p 2 4 ]
+[v ___awmod@dividend dividend `i  1 p 2 6 ]
+"34
+} 0
+"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
+[v ___awdiv __awdiv `(i  1 e 2 0 ]
+{
+"10
+[v ___awdiv@quotient quotient `i  1 a 2 2 ]
+"11
+[v ___awdiv@sign sign `uc  1 a 1 1 ]
+[v ___awdiv@counter counter `uc  1 a 1 0 ]
+"5
+[v ___awdiv@divisor divisor `i  1 p 2 3 ]
+[v ___awdiv@dividend dividend `i  1 p 2 5 ]
+"41
+} 0
 "13 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\DS3231.c
 [v _leerRTC leerRTC `(uc  1 e 1 0 ]
 {
 [v leerRTC@R R `E1292  1 a 1 wreg ]
 "15
-[v leerRTC@DATO DATO `uc  1 a 1 4 ]
+[v leerRTC@DATO DATO `uc  1 a 1 3 ]
 "13
 [v leerRTC@R R `E1292  1 a 1 wreg ]
 "17
-[v leerRTC@R R `E1292  1 a 1 3 ]
+[v leerRTC@R R `E1292  1 a 1 2 ]
 "29
 } 0
 "4 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\Umul8.c
@@ -417,30 +457,6 @@ REG_A 5
 [v _I2C_Master_Wait I2C_Master_Wait `(v  1 e 1 0 ]
 {
 "32
-} 0
-"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awmod.c
-[v ___awmod __awmod `(i  1 e 2 0 ]
-{
-"10
-[v ___awmod@sign sign `uc  1 a 1 9 ]
-[v ___awmod@counter counter `uc  1 a 1 8 ]
-"5
-[v ___awmod@divisor divisor `i  1 p 2 4 ]
-[v ___awmod@dividend dividend `i  1 p 2 6 ]
-"34
-} 0
-"5 C:\Program Files\Microchip\xc8\v2.40\pic\sources\c90\common\awdiv.c
-[v ___awdiv __awdiv `(i  1 e 2 0 ]
-{
-"10
-[v ___awdiv@quotient quotient `i  1 a 2 2 ]
-"11
-[v ___awdiv@sign sign `uc  1 a 1 1 ]
-[v ___awdiv@counter counter `uc  1 a 1 0 ]
-"5
-[v ___awdiv@divisor divisor `i  1 p 2 3 ]
-[v ___awdiv@dividend dividend `i  1 p 2 5 ]
-"41
 } 0
 "99 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\configLCD_4bits.c
 [v _Lcd_Write_String_4bits Lcd_Write_String_4bits `(v  1 e 1 0 ]
@@ -500,8 +516,8 @@ REG_A 5
 [v Lcd_Port_4bits@a a `uc  1 a 1 3 ]
 "34
 } 0
-"63 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
+"70 C:\Users\byron\OneDrive\Documents\GitHub\I2C\I2C_M.X\main_M.c
 [v _ISR ISR `II(v  1 e 1 0 ]
 {
-"79
+"213
 } 0

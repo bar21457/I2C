@@ -59,6 +59,13 @@
 void setup(void);
 
 unsigned char modo = 0;
+uint8_t VAL1, VAL1_U, VAL1_D, VAL1_C; 
+uint8_t SEG, MIN, HOR, DIA, MES, AO;
+uint8_t modifSEG, modifMIN, modifHOR, modifDIA, modifMES, modifAO;
+
+char ADC1[9];
+char tiempo[8] = {"00:00:00"};
+char fecha[10] = {"01/01/2000"};
 
 void __interrupt() ISR (void) {
     
@@ -68,11 +75,138 @@ void __interrupt() ISR (void) {
         {
             modo++;
             
-            if(modo == 6)
+            if(modo == 7)
             {
             modo = 0;
             }
         }
+        
+        if (modo == 1)
+        {
+            if(!PORTBbits.RB1)
+            {
+                ++modifSEG;
+                if (modifSEG == 60)
+                {
+                    modifSEG = 0;
+                }
+            }
+            
+            if(!PORTBbits.RB2)
+            {
+                --modifSEG;
+                if (modifSEG == 0)
+                {
+                    modifSEG = 59;
+                }
+            }
+        }
+            
+        if (modo == 2)
+        {
+            if(!PORTBbits.RB1)
+            {
+                ++modifMIN;
+                if (modifMIN == 60)
+                {
+                    modifMIN = 0;
+                }
+            }
+            
+            if(!PORTBbits.RB2)
+            {
+                --modifMIN;
+                if (modifMIN == 0)
+                {
+                    modifMIN = 59;
+                }
+            }
+        }
+        
+        if (modo == 3)
+        {
+            if(!PORTBbits.RB1)
+            {
+                ++modifHOR;
+                if (modifHOR == 60)
+                {
+                    modifHOR = 0;
+                }
+            }
+            
+            if(!PORTBbits.RB2)
+            {
+                --modifHOR;
+                if (modifHOR == 0)
+                {
+                    modifHOR = 59;
+                }
+            }
+        }
+            
+        if (modo == 4)
+        {
+            if(!PORTBbits.RB1)
+            {
+                ++modifDIA;
+                if (modifDIA == 31)
+                {
+                    modifDIA = 0;
+                }
+            }
+            
+            if(!PORTBbits.RB2)
+            {
+                --modifDIA;
+                if (modifDIA == 0)
+                {
+                    modifDIA = 31;
+                }
+            }
+        }
+        
+        if (modo == 5)
+        {
+            if(!PORTBbits.RB1)
+            {
+                ++modifMES;
+                if (modifMES == 13)
+                {
+                    modifMES = 0;
+                }
+            }
+            
+            if(!PORTBbits.RB2)
+            {
+                --modifMES;
+                if (modifMES == 0)
+                {
+                    modifMES = 12;
+                }
+            }
+        }
+        
+        if (modo == 6)
+        {
+            if(!PORTBbits.RB1)
+            {
+                ++modifAO;
+                if (modifAO == 9999)
+                {
+                    modifAO = 0;
+                }
+            }
+            
+            if(!PORTBbits.RB2)
+            {
+                --modifAO;
+                if (modifAO == 0)
+                {
+                    modifAO = 9999;
+                }
+            }
+        }
+        
         INTCONbits.RBIF = 0; // Bajamos la bandera de interrupción del PORTB
     }
     return;
@@ -81,13 +215,6 @@ void __interrupt() ISR (void) {
 void main(void) {
   
     setup();
-    
-    uint8_t VAL1, VAL1_U, VAL1_D, VAL1_C, SEG, MIN, HOR, DIA, MES, AO;
-
-    char ADC1[9];
-    char tiempo[8] = {"00:00:00"};
-    char fecha[10] = {"01/01/2000"};
-    
     Lcd_Clear_4bits();
     Lcd_Set_Cursor_4bits(1,1);
     Lcd_Write_String_4bits("S1:");
@@ -119,36 +246,62 @@ void main(void) {
         Lcd_Set_Cursor_4bits(2,3);
         Lcd_Write_String_4bits(ADC1);
         
-        SEG = leerRTC(REG_SEG);
+        if (modo != 0)
+        {    
+            modifRTC(REG_SEG,modifSEG);
+            modifRTC(REG_MIN,modifMIN);
+            modifRTC(REG_HOR,modifHOR);
+            modifRTC(REG_DIA,modifDIA);
+            modifRTC(REG_MES,modifMES);
+            modifRTC(REG_A,modifAO);
+            
+            tiempo[7] = modifSEG % 10  + 48;
+            tiempo[6] = modifSEG / 10  + 48;
+            tiempo[4] = modifMIN % 10  + 48;
+            tiempo[3] = modifMIN / 10  + 48;
+            tiempo[1] = modifHOR % 10  + 48;
+            tiempo[0] = modifHOR / 10  + 48;
+            fecha[9] = modifAO % 10 + 48;
+            fecha[8] = modifAO / 10  + 48;
+            fecha[4]  = modifMES % 10 + 48;
+            fecha[3]  = modifMES / 10 + 48;
+            fecha[1]  = modifDIA % 10 + 48;
+            fecha[0]  = modifDIA / 10 + 48;
+            
+            Lcd_Set_Cursor_4bits(1,7);
+            Lcd_Write_String_4bits(tiempo);
+            Lcd_Set_Cursor_4bits(2,7);
+            Lcd_Write_String_4bits(fecha);
+        }
         
-        MIN = leerRTC(REG_MIN);
+        if (modo == 0){
         
-        HOR = leerRTC(REG_HOR);
+            SEG = leerRTC(REG_SEG);
+            MIN = leerRTC(REG_MIN);
+            HOR = leerRTC(REG_HOR);
+            DIA = leerRTC(REG_DIA);
+            MES = leerRTC(REG_MES);
+            AO = leerRTC(REG_A);
+
+            tiempo[7] = SEG % 10  + 48;
+            tiempo[6] = SEG / 10  + 48;
+            tiempo[4] = MIN % 10  + 48;
+            tiempo[3] = MIN / 10  + 48;
+            tiempo[1] = HOR % 10  + 48;
+            tiempo[0] = HOR / 10  + 48;
+            fecha[9] = AO % 10 + 48;
+            fecha[8] = AO / 10  + 48;
+            fecha[4]  = MES % 10 + 48;
+            fecha[3]  = MES / 10 + 48;
+            fecha[1]  = DIA % 10 + 48;
+            fecha[0]  = DIA / 10 + 48;
+
+            Lcd_Set_Cursor_4bits(1,7);
+            Lcd_Write_String_4bits(tiempo);
+            Lcd_Set_Cursor_4bits(2,7);
+            Lcd_Write_String_4bits(fecha);
         
-        DIA = leerRTC(REG_DIA);
-        
-        MES = leerRTC(REG_MES);
-        
-        AO = leerRTC(REG_A);
-        
-        tiempo[7] = SEG % 10  + 48;
-        tiempo[6] = SEG / 10  + 48;
-        tiempo[4] = MIN % 10  + 48;
-        tiempo[3] = MIN / 10  + 48;
-        tiempo[1] = HOR % 10  + 48;
-        tiempo[0] = HOR / 10  + 48;
-        fecha[9] = AO % 10 + 48;
-        fecha[8] = AO / 10  + 48;
-        fecha[4]  = MES % 10 + 48;
-        fecha[3]  = MES / 10 + 48;
-        fecha[1]  = DIA % 10 + 48;
-        fecha[0]  = DIA / 10 + 48;
-        
-        Lcd_Set_Cursor_4bits(1,7);
-        Lcd_Write_String_4bits(tiempo);
-        Lcd_Set_Cursor_4bits(2,7);
-        Lcd_Write_String_4bits(fecha);
-        
+        }
     }
     return;
 }
