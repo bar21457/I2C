@@ -58,6 +58,26 @@
 
 void setup(void);
 
+unsigned char modo = 0;
+
+void __interrupt() ISR (void) {
+    
+    if (INTCONbits.RBIF == 1) // Interrupción del PORTB
+    {
+        if(!PORTBbits.RB0)
+        {
+            modo++;
+            
+            if(modo == 6)
+            {
+            modo = 0;
+            }
+        }
+        INTCONbits.RBIF = 0; // Bajamos la bandera de interrupción del PORTB
+    }
+    return;
+}
+
 void main(void) {
   
     setup();
@@ -92,6 +112,8 @@ void main(void) {
 
     while(1)
     {   
+        
+        PORTA = modo;
         
         I2C_Master_Start();
         I2C_Master_Write(0x11);
@@ -215,14 +237,26 @@ void setup (void){
     ANSEL = 0;
     ANSELH = 0;
 
-    TRISB = 0;              //Configuración del PORTB como input
+    TRISA = 0;              //Configuración del PORTA como output
+    TRISB = 0b00000111;     //Configuración del PORTB como input
     TRISD = 0;              //Configuración del PORTD como output
+    
+    OPTION_REGbits.nRBPU = 0;   //Habilitamos los pull-ups del PORTB
+    WPUBbits.WPUB0 = 1;         //Habilitamos el pull-up del RB0
+    WPUBbits.WPUB1 = 1;         //Habilitamos el pull-up del RB1
+    WPUBbits.WPUB2 = 1;         //Habilitamos el pull-up del RB2
+    IOCB = 0b00000111;
 
+    PORTA = 0;              //Limpiamos el PORTA
     PORTB = 0;              //Limpiamos el PORTB
     PORTD = 0;              //Limpiamos el PORTD
 
-    I2C_Master_Init(100000);        // Inicializar Comuncación I2C
+    I2C_Master_Init(100000);    // Inicializar Comuncación I2C
     setupINTOSC(FOSC_8MHZ);     //Configuramos el oscilador interno a 4MHZ
     Lcd_Init_4bits();           //Inicializamos la LCD en modo de 4 bits
     
+    INTCONbits.GIE = 1;     //Habilitamos las interrupciones globales (GIE)
+    INTCONbits.PEIE = 1;    //Habilitamos las interrupción del PEIE
+    INTCONbits.RBIE = 1;    //Habilitamos las interrupciones del PORTB (RBIE)
+    INTCONbits.RBIF = 0;    //Bajamos la bandera de interrupción del PORTB (RBIF)
 }

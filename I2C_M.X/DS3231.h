@@ -21,7 +21,10 @@ typedef enum
     REG_A = 0x05,
 }REG;
 
+uint8_t D;
+
 uint8_t leerRTC (REG);
+void modifRTC (REG, D);
 
 #endif	/* DS3231_H */
 

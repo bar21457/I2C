@@ -2646,7 +2646,10 @@ typedef enum
     REG_A = 0x05,
 }REG;
 
+uint8_t D;
+
 uint8_t leerRTC (REG);
+void modifRTC (REG, D);
 # 10 "DS3231.c" 2
 
 # 1 "./configI2C.h" 1
@@ -2709,4 +2712,18 @@ uint8_t leerRTC(REG R) {
     DATO = (DATO >> 4) * 10 + (DATO & 0x0F);
 
     return DATO;
+}
+
+void modifRTC(REG R, D) {
+
+    D = ((D / 10) << 4) + (D % 10);
+
+    I2C_Master_Start();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(R);
+    I2C_Master_RepeatedStart();
+    I2C_Master_Write(0xD0);
+    I2C_Master_Write(D);
+    I2C_Master_Stop();
+    _delay((unsigned long)((200)*(8000000/4000.0)));
 }

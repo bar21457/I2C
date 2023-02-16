@@ -256,6 +256,9 @@ Version 4.0 HI-TECH Software Intermediate Code
 "3547
 [; ;C:/Program Files/Microchip/MPLABX/v6.00/packs/Microchip/PIC16Fxxx_DFP/1.3.42/xc8\pic\include\proc\pic16f887.h: 3547: __asm("EECON2 equ 018Dh");
 [; <" EECON2 equ 018Dh ;# ">
+"24 ./DS3231.h
+[; ;./DS3231.h: 24: uint8_t D;
+[v _D `uc ~T0 @X0 1 e ]
 "13 DS3231.c
 [; ;DS3231.c: 13: uint8_t leerRTC(REG R) {
 [v _leerRTC `(uc ~T0 @X0 1 ef1`E1292 ]
@@ -300,4 +303,43 @@ Version 4.0 HI-TECH Software Intermediate Code
 "29
 [; ;DS3231.c: 29: }
 [e :UE 138 ]
+}
+"31
+[; ;DS3231.c: 31: void modifRTC(REG R, D) {
+[v _modifRTC `(v ~T0 @X0 1 ef2`E1292`i ]
+{
+[e :U _modifRTC ]
+[v _R `E1292 ~T0 @X0 1 r1 ]
+[v _D `i ~T0 @X0 1 r2 ]
+[f ]
+"33
+[; ;DS3231.c: 33:     D = ((D / 10) << 4) + (D % 10);
+[e = _D + << / _D -> 10 `i -> 4 `i % _D -> 10 `i ]
+"35
+[; ;DS3231.c: 35:     I2C_Master_Start();
+[e ( _I2C_Master_Start ..  ]
+"36
+[; ;DS3231.c: 36:     I2C_Master_Write(0xD0);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
+"37
+[; ;DS3231.c: 37:     I2C_Master_Write(R);
+[e ( _I2C_Master_Write (1 -> _R `ui ]
+"38
+[; ;DS3231.c: 38:     I2C_Master_RepeatedStart();
+[e ( _I2C_Master_RepeatedStart ..  ]
+"39
+[; ;DS3231.c: 39:     I2C_Master_Write(0xD0);
+[e ( _I2C_Master_Write (1 -> -> 208 `i `ui ]
+"40
+[; ;DS3231.c: 40:     I2C_Master_Write(D);
+[e ( _I2C_Master_Write (1 -> _D `ui ]
+"41
+[; ;DS3231.c: 41:     I2C_Master_Stop();
+[e ( _I2C_Master_Stop ..  ]
+"42
+[; ;DS3231.c: 42:     _delay((unsigned long)((200)*(8000000/4000.0)));
+[e ( __delay (1 -> * -> -> 200 `i `d / -> -> 8000000 `l `d .4000.0 `ul ]
+"43
+[; ;DS3231.c: 43: }
+[e :UE 139 ]
 }

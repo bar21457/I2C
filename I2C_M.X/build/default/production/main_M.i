@@ -2862,10 +2862,33 @@ typedef enum
     REG_A = 0x05,
 }REG;
 
+uint8_t D;
+
 uint8_t leerRTC (REG);
+void modifRTC (REG, D);
 # 48 "main_M.c" 2
 # 59 "main_M.c"
 void setup(void);
+
+unsigned char modo = 0;
+
+void __attribute__((picinterrupt(("")))) ISR (void) {
+
+    if (INTCONbits.RBIF == 1)
+    {
+        if(!PORTBbits.RB0)
+        {
+            modo++;
+
+            if(modo == 6)
+            {
+            modo = 0;
+            }
+        }
+        INTCONbits.RBIF = 0;
+    }
+    return;
+}
 
 void main(void) {
 
@@ -2901,6 +2924,8 @@ void main(void) {
 
     while(1)
     {
+
+        PORTA = modo;
 
         I2C_Master_Start();
         I2C_Master_Write(0x11);
@@ -3024,9 +3049,17 @@ void setup (void){
     ANSEL = 0;
     ANSELH = 0;
 
-    TRISB = 0;
+    TRISA = 0;
+    TRISB = 0b00000111;
     TRISD = 0;
 
+    OPTION_REGbits.nRBPU = 0;
+    WPUBbits.WPUB0 = 1;
+    WPUBbits.WPUB1 = 1;
+    WPUBbits.WPUB2 = 1;
+    IOCB = 0b00000111;
+
+    PORTA = 0;
     PORTB = 0;
     PORTD = 0;
 
@@ -3034,4 +3067,8 @@ void setup (void){
     setupINTOSC(FOSC_8MHZ);
     Lcd_Init_4bits();
 
+    INTCONbits.GIE = 1;
+    INTCONbits.PEIE = 1;
+    INTCONbits.RBIE = 1;
+    INTCONbits.RBIF = 0;
 }
